@@ -23,16 +23,16 @@
   },
 
   "words": [
-    { "text": "window", "count": 1, "category": "2", "type": "2" },
-    { "text": "book", "count": 1, "category": "2", "type": "2" },
-    { "text": "table", "count": 1, "category": "2", "type": "2" },
-    { "text": "door", "count": 1, "category": "2", "type": "2" },
-    { "text": "pencil", "count": 1, "category": "2", "type": "2" },
+    { "text": "window", "count": 1, "category": ["2","6"], "type": "2" },
+    { "text": "book", "count": 1, "category": ["2"], "type": "2" },
+    { "text": "table", "count": 1, "category": ["2","6"], "type": "2" },
+    { "text": "door", "count": 1, "category": ["2","6"], "type": "2" },
+    { "text": "pencil", "count": 1, "category": ["2"], "type": "2" },
 
-    { "text": "dog", "count": 1, "category": "3", "type": "2" },
-    { "text": "cat", "count": 1, "category": "3", "type": "2" },
+    { "text": "dog", "count": 1, "category": ["3"], "type": "2" },
+    { "text": "cat", "count": 1, "category": ["3"], "type": "2" },
 
-    { "text": "apple", "count": 1, "category": "4", "type": "2" },
-    { "text": "water", "count": 1, "category": "4", "type": "2" }
+    { "text": "apple", "count": 1, "category": ["4"], "type": "2" },
+    { "text": "water", "count": 1, "category": ["4"], "type": "2" }
   ]
 }
