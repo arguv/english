@@ -5,7 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* center vertically */
   font-family: "Comic Sans MS", Arial, sans-serif;
   overflow: hidden;
 }
@@ -114,9 +114,77 @@ body {
   100% { transform: scale(1) rotate(0deg); opacity: 1; color: #333; }
 }
 
-/* MOBILE */
+/* MOBILE STYLES */
 @media (max-width: 500px) {
-  #word { font-size: 48px; }
-  #mascot { width: 120px; }
-  #top-menu select, #top-menu button { font-size: 16px; }
+  body {
+    justify-content: flex-start; /* allow scrolling if needed */
+    padding-top: 20px;
+  }
+
+  /* Card */
+  .card {
+    width: 85%;
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  }
+
+  #word {
+    font-size: 42px;
+    line-height: 1.2;
+    padding: 10px;
+  }
+
+  #mascot {
+    width: 120px;
+    margin-bottom: 15px;
+  }
+
+  /* Top menu */
+  #top-menu {
+    align-items: stretch;
+    gap: 10px;
+    position: static;
+  }
+
+  #top-menu select,
+  #top-menu button {
+    font-size: 18px;
+    padding: 12px 10px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  #top-menu #refresh-session {
+    font-size: 20px;
+  }
+
+  #refresh-text {
+    display: none;
+  }
+
+  #image-container {
+    width: 70%;
+  }
+
+  /* Footer */
+  #footer {
+    gap: 12px;
+  }
+
+  #footer button {
+    font-size: 28px;
+  }
+
+  #progress {
+    font-size: 20px;
+  }
+
+  /* Image */
+  #word-image {
+    max-width: 90%;
+    width: 100%;
+    margin-bottom: 15px;
+  }
 }
