@@ -14,12 +14,13 @@ let allWords = [];
 let remaining = [];
 let total = 0;
 let currentWord = "";
+let currentWordObj = null;
 let sessionStarted = false;
 
 const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#2d6fb", "#9ecd6e"];
 let bgIndex = 0;
 
-// Hide icons before session starts
+// Initial UI state
 speakBtn.style.display = "none";
 showImgBtn.style.display = "none";
 wordImage.style.display = "none";
@@ -33,19 +34,19 @@ fetch("words.json")
         buildSession();
     });
 
-// Normalize words (remove empty, sum duplicates)
+// Normalize words
 function normalizeWords(words) {
     const map = {};
     words.forEach(w => {
         if (!w.text) return;
         const key = w.text.toLowerCase();
-        if (!map[key]) map[key] = {...w};
+        if (!map[key]) map[key] = { ...w };
         else map[key].count += w.count;
     });
     return Object.values(map);
 }
 
-// Initialize menu
+// Menu
 function initMenu(categories, types) {
     fillSelect(categorySelect, categories, "2");
     fillSelect(typeSelect, types, "2");
@@ -55,8 +56,8 @@ function initMenu(categories, types) {
     refreshBtn.onclick = refreshSession;
 }
 
-// Fill select options
 function fillSelect(select, data, def) {
+    select.innerHTML = "";
     Object.keys(data).forEach(k => {
         const opt = document.createElement("option");
         opt.value = k;
@@ -66,12 +67,13 @@ function fillSelect(select, data, def) {
     select.value = def;
 }
 
-// Build session considering multiple categories
+// Build session
 function buildSession() {
     const catId = categorySelect.value;
     const typeId = typeSelect.value;
 
     remaining = [];
+
     allWords.forEach(w => {
         if (Array.isArray(w.category)) {
             if (!w.category.includes(catId)) return;
@@ -80,41 +82,40 @@ function buildSession() {
         }
         if (w.type !== typeId) return;
 
-        for (let i = 0; i < w.count; i++) remaining.push(w.text);
+        for (let i = 0; i < w.count; i++) {
+            remaining.push(w);
+        }
     });
 
     remaining.sort(() => Math.random() - 0.5);
     total = remaining.length;
+
     progressEl.textContent = `📘 0 / ${total}`;
+    wordEl.textContent = "👋 Tap or press SPACE";
 
     mascot.style.display = "block";
     wordImage.style.display = "none";
-    wordEl.textContent = "👋 Tap or press SPACE";
-
-    sessionStarted = false;
     speakBtn.style.display = "none";
     showImgBtn.style.display = "none";
 
     categorySelect.disabled = false;
     typeSelect.disabled = false;
-    localStorage.removeItem("kidWords");
+    sessionStarted = false;
 }
 
-// Reset session if menu changes
+// Reset
 function resetSession() {
     if (sessionStarted) return;
     buildSession();
 }
 
-// Refresh session button
 function refreshSession() {
-    localStorage.removeItem("kidWords");
     categorySelect.value = "2";
     typeSelect.value = "2";
     buildSession();
 }
 
-// Animate word
+// Animation
 function animateWord() {
     wordEl.classList.remove("animate");
     void wordEl.offsetWidth;
@@ -127,10 +128,10 @@ function nextWord() {
         wordEl.textContent = "🎉 Finished!";
         speakBtn.style.display = "none";
         showImgBtn.style.display = "none";
+        wordImage.style.display = "none";
         mascot.style.display = "block";
         categorySelect.disabled = false;
         typeSelect.disabled = false;
-        wordImage.style.display = "none";
         sessionStarted = false;
         return;
     }
@@ -140,18 +141,29 @@ function nextWord() {
     typeSelect.disabled = true;
     mascot.style.display = "none";
 
-    currentWord = remaining.pop();
+    currentWordObj = remaining.pop();
+    currentWord = currentWordObj.text;
+
     wordEl.textContent = currentWord;
     animateWord();
     progressEl.textContent = `📘 ${total - remaining.length} / ${total}`;
 
     speakBtn.style.display = "inline";
-    showImgBtn.style.display = "inline";
     wordImage.style.display = "none";
+
+    // ✅ IMAGE FLAG LOGIC
+    if (currentWordObj.image === true) {
+        showImgBtn.style.display = "inline";
+        showImgBtn.disabled = false;
+    } else {
+        showImgBtn.style.display = "none";
+        showImgBtn.disabled = true;
+    }
 }
 
-// Card click & spacebar
+// Events
 card.addEventListener("click", nextWord);
+
 document.addEventListener("keydown", e => {
     if (e.code === "Space") {
         e.preventDefault();
@@ -159,20 +171,20 @@ document.addEventListener("keydown", e => {
     }
 });
 
-// Speak button
 speakBtn.onclick = e => {
     e.stopPropagation();
     speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord));
 };
 
-// Show image button
 showImgBtn.onclick = e => {
     e.stopPropagation();
+    if (showImgBtn.disabled) return;
+
     wordImage.src = `images/${currentWord}.png`;
     wordImage.style.display = "block";
 };
 
-// Background animation
+// Background
 function changeBackground() {
     document.body.style.background = neutralColors[bgIndex];
     bgIndex = (bgIndex + 1) % neutralColors.length;
