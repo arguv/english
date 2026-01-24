@@ -1,0 +1,38 @@
+{
+  "categories": {
+    "Common": "Common",
+    "Animals": "Animals",
+    "Food & Drink": "Food & Drink",
+    "People & Family": "People & Family",
+    "Places & Buildings": "Places & Buildings",
+    "Clothing": "Clothing",
+    "Transportation": "Transportation",
+    "Colors": "Colors",
+    "Actions": "Actions",
+    "Time": "Time",
+    "Math": "Math"
+  },
+
+  "types": {
+    "Word": "Word",
+    "Semantic": "Semantic",
+    "Sentence": "Sentence",
+    "Phonetic": "Phonetic",
+    "Collocational": "Collocational",
+    "Fixed Phrase": "Fixed Phrase"
+  },
+
+  "words": [
+    { "text": "window", "count": 1, "category": "Common", "type": "Word" },
+    { "text": "book", "count": 1, "category": "Common", "type": "Word" },
+    { "text": "table", "count": 1, "category": "Common", "type": "Word" },
+    { "text": "door", "count": 1, "category": "Common", "type": "Word" },
+    { "text": "pencil", "count": 1, "category": "Common", "type": "Word" },
+
+    { "text": "dog", "count": 1, "category": "Animals", "type": "Word" },
+    { "text": "cat", "count": 1, "category": "Animals", "type": "Word" },
+
+    { "text": "apple", "count": 1, "category": "Food & Drink", "type": "Word" },
+    { "text": "water", "count": 1, "category": "Food & Drink", "type": "Word" }
+  ]
+}
