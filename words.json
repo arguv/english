@@ -1,38 +1,38 @@
 {
   "categories": {
-    "Common": "Common",
-    "Animals": "Animals",
-    "Food & Drink": "Food & Drink",
-    "People & Family": "People & Family",
-    "Places & Buildings": "Places & Buildings",
-    "Clothing": "Clothing",
-    "Transportation": "Transportation",
-    "Colors": "Colors",
-    "Actions": "Actions",
-    "Time": "Time",
-    "Math": "Math"
+    "2": "Common",
+    "3": "Animals",
+    "4": "Food & Drink",
+    "5": "People & Family",
+    "6": "Places & Buildings",
+    "7": "Clothing",
+    "8": "Transportation",
+    "9": "Colors",
+    "10": "Actions",
+    "11": "Time",
+    "12": "Math"
   },
 
   "types": {
-    "Word": "Word",
-    "Semantic": "Semantic",
-    "Sentence": "Sentence",
-    "Phonetic": "Phonetic",
-    "Collocational": "Collocational",
-    "Fixed Phrase": "Fixed Phrase"
+    "2": "Word",
+    "3": "Semantic",
+    "4": "Sentence",
+    "5": "Phonetic",
+    "6": "Collocational",
+    "7": "Fixed Phrase"
   },
 
   "words": [
-    { "text": "window", "count": 1, "category": "Common", "type": "Word" },
-    { "text": "book", "count": 1, "category": "Common", "type": "Word" },
-    { "text": "table", "count": 1, "category": "Common", "type": "Word" },
-    { "text": "door", "count": 1, "category": "Common", "type": "Word" },
-    { "text": "pencil", "count": 1, "category": "Common", "type": "Word" },
+    { "text": "window", "count": 1, "category": "2", "type": "2" },
+    { "text": "book", "count": 1, "category": "2", "type": "2" },
+    { "text": "table", "count": 1, "category": "2", "type": "2" },
+    { "text": "door", "count": 1, "category": "2", "type": "2" },
+    { "text": "pencil", "count": 1, "category": "2", "type": "2" },
 
-    { "text": "dog", "count": 1, "category": "Animals", "type": "Word" },
-    { "text": "cat", "count": 1, "category": "Animals", "type": "Word" },
+    { "text": "dog", "count": 1, "category": "3", "type": "2" },
+    { "text": "cat", "count": 1, "category": "3", "type": "2" },
 
-    { "text": "apple", "count": 1, "category": "Food & Drink", "type": "Word" },
-    { "text": "water", "count": 1, "category": "Food & Drink", "type": "Word" }
+    { "text": "apple", "count": 1, "category": "4", "type": "2" },
+    { "text": "water", "count": 1, "category": "4", "type": "2" }
   ]
 }

@@ -17,7 +17,6 @@ let currentWord = "";
 let sessionStarted = false;
 
 // Colors for background animation
-const colors = ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#9b59b6", "#e67e22", "#1abc9c"];
 const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#2d6fb", "#9ecd6e"];
 let bgIndex = 0;
 
@@ -35,7 +34,7 @@ fetch("words.json")
     buildSession();
   });
 
-// Remove duplicates, sum counts
+// Normalize words (remove empty, sum duplicates)
 function normalizeWords(words) {
   const map = {};
   words.forEach(w => {
@@ -47,10 +46,10 @@ function normalizeWords(words) {
   return Object.values(map);
 }
 
-// Initialize top menu
+// Initialize menu
 function initMenu(categories, types) {
-  fillSelect(categorySelect, categories, "Common");
-  fillSelect(typeSelect, types, "Word");
+  fillSelect(categorySelect, categories, "2"); // default category id
+  fillSelect(typeSelect, types, "2");         // default type id
 
   categorySelect.onchange = resetSession;
   typeSelect.onchange = resetSession;
@@ -68,14 +67,14 @@ function fillSelect(select, data, def) {
   select.value = def;
 }
 
-// Build session words based on category/type
+// Build session based on numeric IDs
 function buildSession() {
-  const cat = categorySelect.value;
-  const type = typeSelect.value;
+  const catId = categorySelect.value;
+  const typeId = typeSelect.value;
 
   remaining = [];
   allWords.forEach(w => {
-    if (w.category === cat && w.type === type) {
+    if (w.category === catId && w.type === typeId) {
       for (let i = 0; i < w.count; i++) remaining.push(w.text);
     }
   });
@@ -85,7 +84,7 @@ function buildSession() {
   progressEl.textContent = `📘 0 / ${total}`;
 
   mascot.style.display = "block";
-  wordImage.style.display = "none"; // Hide image at start
+  wordImage.style.display = "none";
   wordEl.textContent = "👋 Tap or press SPACE";
 
   sessionStarted = false;
@@ -94,33 +93,31 @@ function buildSession() {
 
   categorySelect.disabled = false;
   typeSelect.disabled = false;
-
-  // Clear any stored session
   localStorage.removeItem("kidWords");
 }
 
-// Reset session if user changes menu (before session starts)
+// Reset session if menu changes
 function resetSession() {
   if (sessionStarted) return;
   buildSession();
 }
 
-// Refresh session button logic
+// Refresh session button
 function refreshSession() {
   localStorage.removeItem("kidWords");
-  categorySelect.value = "Common";
-  typeSelect.value = "Word";
+  categorySelect.value = "2";
+  typeSelect.value = "2";
   buildSession();
 }
 
 // Animate word
 function animateWord() {
   wordEl.classList.remove("animate");
-  void wordEl.offsetWidth; // trigger reflow
+  void wordEl.offsetWidth;
   wordEl.classList.add("animate");
 }
 
-// Next word logic
+// Next word
 function nextWord() {
   if (!remaining.length) {
     wordEl.textContent = "🎉 Finished!";
@@ -137,7 +134,6 @@ function nextWord() {
   sessionStarted = true;
   categorySelect.disabled = true;
   typeSelect.disabled = true;
-
   mascot.style.display = "none";
 
   currentWord = remaining.pop();
@@ -172,7 +168,7 @@ showImgBtn.onclick = e => {
   wordImage.style.display = "block";
 };
 
-// Background cycling animation
+// Background animation
 function changeBackground() {
   document.body.style.background = neutralColors[bgIndex];
   bgIndex = (bgIndex + 1) % neutralColors.length;
