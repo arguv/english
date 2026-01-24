@@ -168,7 +168,7 @@ speakBtn.onclick = e => {
 // Show image button
 showImgBtn.onclick = e => {
     e.stopPropagation();
-    wordImage.src = `images/${currentWord}.jpeg`;
+    wordImage.src = `images/${currentWord}.png`;
     wordImage.style.display = "block";
 };
 
