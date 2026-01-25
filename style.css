@@ -107,4 +107,17 @@ body {
 @media (max-width: 500px) {
     #word { font-size: 42px; }
     #mascot { width: 120px; }
+
+    #top-menu select,
+    #top-menu button {
+        font-size: 15px;
+    }
+
+    #refresh-text {
+        display: none;
+    }
+
+    .card {
+        width: 80%;
+    }
 }
