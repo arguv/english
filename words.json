@@ -26,6 +26,20 @@
   },
   "words": [
 
+    { "text": "bus", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+    { "text": "car", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+    { "text": "boat", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+    { "text": "bicycle", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+    { "text": "train", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+
+    { "text": "hour", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "minute", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "second", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "day", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "week", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "month", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+    { "text": "year", "count": 1, "category": ["2","11"], "type": "2", "image": false },
+
     { "text": "like", "count": 1, "category": ["2","10"], "type": "2", "image": false },
     { "text": "ask", "count": 1, "category": ["2","10"], "type": "2", "image": false },
     { "text": "answer", "count": 1, "category": ["2","10"], "type": "2", "image": false },
