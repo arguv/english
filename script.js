@@ -58,14 +58,29 @@ function initMenu(categories, types) {
 
 function fillSelect(select, data, def) {
     select.innerHTML = "";
-    Object.keys(data).forEach(k => {
-        const opt = document.createElement("option");
-        opt.value = k;
-        opt.textContent = data[k];
-        select.appendChild(opt);
-    });
+
+    // NEW: array-based structure
+    if (Array.isArray(data)) {
+        data.forEach(item => {
+            const opt = document.createElement("option");
+            opt.value = item.id;
+            opt.textContent = item.name;
+            select.appendChild(opt);
+        });
+    }
+    // OLD: object-based (kept for safety / types)
+    else {
+        Object.keys(data).forEach(k => {
+            const opt = document.createElement("option");
+            opt.value = k;
+            opt.textContent = data[k];
+            select.appendChild(opt);
+        });
+    }
+
     select.value = def;
 }
+
 
 // Build session
 function buildSession() {

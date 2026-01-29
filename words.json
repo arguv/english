@@ -1,21 +1,21 @@
 {
-  "categories": {
-    "2": "Common",
-    "3": "Animals",
-    "4": "Food & Drink",
-    "5": "People & Family",
-    "6": "Places & Buildings",
-    "7": "Clothing",
-    "8": "Transportation",
-    "9": "Colors",
-    "10": "Actions",
-    "11": "Time",
-    "12": "Math",
-    "13": "Body",
-    "14": "School/Classroom",
-    "15": "Size/Quality/Feel",
-    "16": "Miscellaneous"
-  },
+  "categories": [
+    { "id": "2",  "name": "Common",             "folder": false },
+    { "id": "3",  "name": "Animals",            "folder": true },
+    { "id": "4",  "name": "Food & Drink",       "folder": false },
+    { "id": "5",  "name": "People & Family",    "folder": false },
+    { "id": "6",  "name": "Places & Buildings", "folder": false },
+    { "id": "7",  "name": "Clothing",           "folder": false },
+    { "id": "8",  "name": "Transportation",     "folder": false },
+    { "id": "9",  "name": "Colors",             "folder": true },
+    { "id": "10", "name": "Actions",            "folder": false },
+    { "id": "11", "name": "Time",               "folder": false },
+    { "id": "12", "name": "Math",               "folder": true },
+    { "id": "13", "name": "Body",               "folder": false },
+    { "id": "14", "name": "School/Classroom",   "folder": false },
+    { "id": "15", "name": "Size/Quality/Feel",  "folder": false },
+    { "id": "16", "name": "Miscellaneous",      "folder": false }
+  ],
   "types": {
     "2": "Word",
     "3": "Semantic",
