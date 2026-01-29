@@ -20,6 +20,9 @@ let sessionStarted = false;
 const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#2d6fb", "#9ecd6e"];
 let bgIndex = 0;
 
+// For quick category lookup
+let categoryMap = {};
+
 // Initial UI state
 speakBtn.style.display = "none";
 showImgBtn.style.display = "none";
@@ -48,6 +51,13 @@ function normalizeWords(words) {
 
 // Menu
 function initMenu(categories, types) {
+    // Build category lookup by id
+    if (Array.isArray(categories)) {
+        categories.forEach(c => {
+            categoryMap[c.id] = c;
+        });
+    }
+    console.log(categoryMap);
     fillSelect(categorySelect, categories, "2");
     fillSelect(typeSelect, types, "2");
 
@@ -59,7 +69,6 @@ function initMenu(categories, types) {
 function fillSelect(select, data, def) {
     select.innerHTML = "";
 
-    // NEW: array-based structure
     if (Array.isArray(data)) {
         data.forEach(item => {
             const opt = document.createElement("option");
@@ -67,9 +76,7 @@ function fillSelect(select, data, def) {
             opt.textContent = item.name;
             select.appendChild(opt);
         });
-    }
-    // OLD: object-based (kept for safety / types)
-    else {
+    } else {
         Object.keys(data).forEach(k => {
             const opt = document.createElement("option");
             opt.value = k;
@@ -80,7 +87,6 @@ function fillSelect(select, data, def) {
 
     select.value = def;
 }
-
 
 // Build session
 function buildSession() {
@@ -195,7 +201,23 @@ showImgBtn.onclick = e => {
     e.stopPropagation();
     if (showImgBtn.disabled) return;
 
-    wordImage.src = `images/${currentWord}.png`;
+    let catId = null;
+
+    if (Array.isArray(currentWordObj.category)) {
+        // Find first category with folder true
+        catId = currentWordObj.category.find(id => categoryMap[id] && categoryMap[id].folder) || currentWordObj.category[0];
+    } else {
+        catId = currentWordObj.category;
+    }
+
+    const cat = categoryMap[catId];
+    let imgPath = `images/${currentWord}.png`;
+
+    if (cat && cat.folder === true) {
+        imgPath = `images/${catId}/${currentWord}.png`;
+    }
+
+    wordImage.src = imgPath;
     wordImage.style.display = "block";
 };
 
