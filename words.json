@@ -2,7 +2,7 @@
   "categories": [
     { "id": "2",  "name": "Common",             "folder": false },
     { "id": "3",  "name": "Animals",            "folder": true },
-    { "id": "4",  "name": "Food & Drink",       "folder": false },
+    { "id": "4",  "name": "Food & Drink",       "folder": true },
     { "id": "5",  "name": "People & Family",    "folder": false },
     { "id": "6",  "name": "Places & Buildings", "folder": false },
     { "id": "7",  "name": "Clothing",           "folder": false },
