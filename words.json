@@ -6,7 +6,7 @@
     { "id": "5",  "name": "People & Family",    "folder": false },
     { "id": "6",  "name": "Places & Buildings", "folder": false },
     { "id": "7",  "name": "Clothing",           "folder": false },
-    { "id": "8",  "name": "Transportation",     "folder": false },
+    { "id": "8",  "name": "Transportation",     "folder": true },
     { "id": "9",  "name": "Colors",             "folder": true },
     { "id": "10", "name": "Actions",            "folder": false },
     { "id": "11", "name": "Time",               "folder": false },
@@ -26,11 +26,11 @@
   },
   "words": [
 
-    { "text": "bus", "count": 1, "category": ["2","8"], "type": "2", "image": false },
-    { "text": "car", "count": 1, "category": ["2","8"], "type": "2", "image": false },
-    { "text": "boat", "count": 1, "category": ["2","8"], "type": "2", "image": false },
-    { "text": "bicycle", "count": 1, "category": ["2","8"], "type": "2", "image": false },
-    { "text": "train", "count": 1, "category": ["2","8"], "type": "2", "image": false },
+    { "text": "bus", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "car", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "boat", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "bicycle", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "train", "count": 1, "category": ["2","8"], "type": "2", "image": true },
 
     { "text": "hour", "count": 1, "category": ["2","11"], "type": "2", "image": false },
     { "text": "minute", "count": 1, "category": ["2","11"], "type": "2", "image": false },
