@@ -28,9 +28,12 @@
 
     { "text": "bus", "count": 1, "category": ["2","8"], "type": "2", "image": true },
     { "text": "car", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "truck", "count": 1, "category": ["2","8"], "type": "2", "image": true },
     { "text": "boat", "count": 1, "category": ["2","8"], "type": "2", "image": true },
     { "text": "bicycle", "count": 1, "category": ["2","8"], "type": "2", "image": true },
     { "text": "train", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "helicopter", "count": 1, "category": ["2","8"], "type": "2", "image": true },
+    { "text": "airplane", "count": 1, "category": ["2","8"], "type": "2", "image": true },
 
     { "text": "hour", "count": 1, "category": ["2","11"], "type": "2", "image": false },
     { "text": "minute", "count": 1, "category": ["2","11"], "type": "2", "image": false },
