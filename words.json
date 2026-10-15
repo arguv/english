@@ -20,11 +20,7 @@
   ],
   "types": {
     "2": "Word",
-    "3": "Semantic",
-    "4": "Sentence",
-    "5": "Phonetic",
-    "6": "Collocational",
-    "7": "Fixed Phrase"
+    "4": "Sentence"
   },
   "words": [
 
@@ -374,10 +370,6 @@
     { "text": "That lizard isn't beautiful", "count": 1, "category": ["2"], "type": "4", "image": false },
     { "text": "Look at my nose", "count": 1, "category": ["2"], "type": "4", "image": false },
     { "text": "Say hello", "count": 1, "category": ["2"], "type": "4", "image": false },
-    { "text": "Count birds", "count": 1, "category": ["2"], "type": "4", "image": false },
-    { "text": "", "count": 1, "category": ["2"], "type": "4", "image": false },
-    { "text": "", "count": 1, "category": ["2"], "type": "4", "image": false },
-    { "text": "", "count": 1, "category": ["2"], "type": "4", "image": false },
-    { "text": "", "count": 1, "category": ["2"], "type": "4", "image": false }
+    { "text": "Count birds", "count": 1, "category": ["2"], "type": "4", "image": false }
   ]
 }
