@@ -58,7 +58,7 @@ let currentWord = "";
 let currentWordObj = null;
 let sessionStarted = false;
 
-const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#2d6fb", "#9ecd6e"];
+const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#a2d6fb", "#9ecd6e"];
 let bgIndex = 0;
 
 // For quick category lookup
@@ -98,7 +98,7 @@ function initMenu(categories, types) {
             categoryMap[c.id] = c;
         });
     }
-    console.log(categoryMap);
+
     fillSelect(categorySelect, categories, "2");
     fillSelect(typeSelect, types, "2");
 
@@ -152,7 +152,10 @@ function buildSession() {
         }
     });
 
-    remaining.sort(() => Math.random() - 0.5);
+    for (let i = remaining.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+    }
     total = remaining.length;
     known = 0;
 
@@ -255,10 +258,14 @@ knowItBtn.onclick = () => rateWord(true);
 practiceAgainBtn.onclick = () => rateWord(false);
 
 document.addEventListener("keydown", e => {
-    if (e.code === "Space" && !e.target.closest("button, select, input, textarea, [contenteditable]")) {
-        e.preventDefault();
-        nextWord();
-    }
+    if (e.code !== "Space" || e.defaultPrevented || e.repeat || e.isComposing
+        || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+
+    const controls = "button, select, input, textarea, a[href], summary, audio[controls], video[controls], [contenteditable], [role], [tabindex]";
+    if (e.target.closest(controls) || document.activeElement?.closest(controls)) return;
+
+    e.preventDefault();
+    nextWord();
 });
 
 speakBtn.onclick = e => {
