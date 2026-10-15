@@ -64,6 +64,7 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // For quick category lookup
 let categoryMap = {};
+let categoriesByType = {};
 
 // Initial UI state
 setSpeechControls(false);
@@ -75,37 +76,49 @@ fetch("words.json")
     .then(res => res.json())
     .then(data => {
         allWords = normalizeWords(data.words || []);
-        initMenu(data.categories, data.types);
+        initMenu(data);
         buildSession();
     });
 
 // Normalize words
 function normalizeWords(words) {
-    const map = {};
+    const map = new Map();
     words.forEach(w => {
         if (!w.text) return;
-        const key = w.text.toLowerCase();
-        if (!map[key]) map[key] = { ...w };
-        else map[key].count += w.count;
+        const key = JSON.stringify([w.type, w.text.toLowerCase()]);
+        if (!map.has(key)) map.set(key, { ...w });
+        else {
+            const existing = map.get(key);
+            existing.count += w.count;
+            existing.category = [...new Set([].concat(existing.category, w.category))];
+        }
     });
-    return Object.values(map);
+    return [...map.values()];
 }
 
 // Menu
-function initMenu(categories, types) {
-    // Build category lookup by id
-    if (Array.isArray(categories)) {
-        categories.forEach(c => {
-            categoryMap[c.id] = c;
-        });
-    }
-
-    fillSelect(categorySelect, categories, "2");
+function initMenu(data) {
+    const types = data.types.map(type => {
+        const id = Object.keys(type).find(key => key !== "categories");
+        categoriesByType[id] = data[type.categories];
+        return { id, name: type[id] };
+    });
     fillSelect(typeSelect, types, "2");
+    updateCategories();
 
     categorySelect.onchange = resetSession;
-    typeSelect.onchange = resetSession;
+    typeSelect.onchange = () => {
+        if (sessionStarted) return;
+        updateCategories();
+        buildSession();
+    };
     refreshBtn.onclick = refreshSession;
+}
+
+function updateCategories() {
+    const categories = categoriesByType[typeSelect.value] || [];
+    categoryMap = Object.fromEntries(categories.map(category => [category.id, category]));
+    fillSelect(categorySelect, categories, categories[0]?.id);
 }
 
 function fillSelect(select, data, def) {
@@ -127,7 +140,7 @@ function fillSelect(select, data, def) {
         });
     }
 
-    select.value = def;
+    if (def !== undefined) select.value = def;
 }
 
 // Build session
@@ -162,9 +175,9 @@ function buildSession() {
 
     updateProgress();
     learningActions.hidden = true;
-    wordEl.textContent = "👋 Tap or press SPACE";
-    card.disabled = false;
-    card.setAttribute("aria-disabled", "false");
+    wordEl.textContent = total ? "👋 Tap or press SPACE" : "No entries in this category yet.";
+    card.disabled = total === 0;
+    card.setAttribute("aria-disabled", String(total === 0));
 
     mascot.style.display = "block";
     wordImage.style.display = "none";
@@ -213,6 +226,7 @@ function rateWord(knowIt) {
 }
 
 function nextWord() {
+    if (!total) return;
     if (currentWordObj) return;
     stopSpeech();
     if (!remaining.length) {

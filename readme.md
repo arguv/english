@@ -3,7 +3,7 @@ https://arguv.github.io/english/
 Local server:
 
 ```sh
-npx serve .
+npx serve
 ```
 
 `serve` reads `serve.json` and sends `Cache-Control: no-store`,
