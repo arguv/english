@@ -2,6 +2,43 @@ const card = document.getElementById("card");
 const wordEl = document.getElementById("word");
 const progressEl = document.getElementById("progress");
 const speakBtn = document.getElementById("speak-btn");
+const slowSpeakBtn = document.getElementById("slow-speak-btn");
+const speechStatus = document.getElementById("speech-status");
+const speechSupported = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+let englishVoice = null;
+
+function updateEnglishVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    const language = voice => voice.lang.toLowerCase().replace(/_/g, "-");
+    englishVoice = voices.find(voice => language(voice) === "en-us")
+        || voices.find(voice => /^en(?:-|$)/.test(language(voice)))
+        || null;
+}
+
+function stopSpeech() {
+    if (speechSupported) window.speechSynthesis.cancel();
+}
+
+function setSpeechControls(visible) {
+    speakBtn.style.display = slowSpeakBtn.style.display = visible && speechSupported ? "inline" : "none";
+    speechStatus.hidden = !visible || speechSupported;
+}
+
+function pronounceWord(rate) {
+    if (!speechSupported || !currentWord) return;
+    stopSpeech();
+    updateEnglishVoice();
+    const utterance = new window.SpeechSynthesisUtterance(currentWord);
+    utterance.lang = "en-US";
+    if (englishVoice) utterance.voice = englishVoice;
+    utterance.rate = rate;
+    window.speechSynthesis.speak(utterance);
+}
+
+if (speechSupported) {
+    updateEnglishVoice();
+    window.speechSynthesis.addEventListener("voiceschanged", updateEnglishVoice);
+}
 const showImgBtn = document.getElementById("show-img-btn");
 const wordImage = document.getElementById("word-image");
 const mascot = document.getElementById("mascot");
@@ -24,7 +61,7 @@ let bgIndex = 0;
 let categoryMap = {};
 
 // Initial UI state
-speakBtn.style.display = "none";
+setSpeechControls(false);
 showImgBtn.style.display = "none";
 wordImage.style.display = "none";
 
@@ -90,6 +127,9 @@ function fillSelect(select, data, def) {
 
 // Build session
 function buildSession() {
+    stopSpeech();
+    currentWord = "";
+    currentWordObj = null;
     const catId = categorySelect.value;
     const typeId = typeSelect.value;
 
@@ -116,7 +156,7 @@ function buildSession() {
 
     mascot.style.display = "block";
     wordImage.style.display = "none";
-    speakBtn.style.display = "none";
+    setSpeechControls(false);
     showImgBtn.style.display = "none";
 
     categorySelect.disabled = false;
@@ -145,9 +185,12 @@ function animateWord() {
 
 // Next word
 function nextWord() {
+    stopSpeech();
     if (!remaining.length) {
+        currentWord = "";
+        currentWordObj = null;
         wordEl.textContent = "🎉 Finished!";
-        speakBtn.style.display = "none";
+        setSpeechControls(false);
         showImgBtn.style.display = "none";
         wordImage.style.display = "none";
         mascot.style.display = "block";
@@ -169,7 +212,7 @@ function nextWord() {
     animateWord();
     progressEl.textContent = `📘 ${total - remaining.length} / ${total}`;
 
-    speakBtn.style.display = "inline";
+    setSpeechControls(true);
     wordImage.style.display = "none";
 
     // ✅ IMAGE FLAG LOGIC
@@ -186,7 +229,7 @@ function nextWord() {
 card.addEventListener("click", nextWord);
 
 document.addEventListener("keydown", e => {
-    if (e.code === "Space") {
+    if (e.code === "Space" && !e.target.closest("button, select, input, textarea, [contenteditable]")) {
         e.preventDefault();
         nextWord();
     }
@@ -194,8 +237,15 @@ document.addEventListener("keydown", e => {
 
 speakBtn.onclick = e => {
     e.stopPropagation();
-    speechSynthesis.speak(new SpeechSynthesisUtterance(currentWord));
+    pronounceWord(1);
 };
+
+slowSpeakBtn.onclick = e => {
+    e.stopPropagation();
+    pronounceWord(0.75);
+};
+
+window.addEventListener("pagehide", stopSpeech);
 
 showImgBtn.onclick = e => {
     e.stopPropagation();

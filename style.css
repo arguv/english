@@ -92,6 +92,17 @@ body {
     cursor: not-allowed;
 }
 
+#footer button:focus-visible {
+    outline: 3px solid #333;
+    border-radius: 8px;
+}
+
+#speech-status {
+    font-size: 14px;
+    color: #333;
+    margin: 8px 0 0;
+}
+
 /* Animations */
 @keyframes wiggle {
     0%,100% { transform: rotate(0); }
