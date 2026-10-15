@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Robots -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex, noodp, noydir">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, noarchive">
+    <meta name="ia_archiver" content="noindex, nofollow">
+
+    <!-- Cache and framing policies must be sent as HTTP response headers. -->
+    <meta name="referrer" content="no-referrer">
+
+    <!-- Empty social previews -->
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
     <title>Happy Word Game</title>
-    <link rel="stylesheet" href="style.css"/>
+
     <link rel="icon" href="favicon.ico"/>
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png"/>
     <link rel="apple-touch-icon-180x180" href="apple-touch-icon-180x180.png"/>
     <link rel="apple-touch-icon-167x167" href="apple-touch-icon-167x167.png"/>
     <link rel="apple-touch-icon-152x152" href="apple-touch-icon-152x152.png"/>
+
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <!-- TOP MENU -->
 <div id="top-menu">
-    <select id="category-select"></select>
-    <select id="type-select"></select>
-    <button id="refresh-session">🔄 <span id="refresh-text">Refresh Session</span></button>
+    <select id="category-select" aria-label="Word category"></select>
+    <select id="type-select" aria-label="Word type"></select>
+    <button id="refresh-session" aria-label="Refresh session">🔄 <span id="refresh-text">Refresh Session</span></button>
 </div>
 
 <!-- IMAGE -->
@@ -40,7 +56,7 @@
 
 <!-- FOOTER -->
 <div id="footer">
-    <button id="show-img-btn" disabled>🖼️</button>
+    <button id="show-img-btn" aria-label="Show word image" title="Show word image" disabled>🖼️</button>
     <span id="progress" role="status"></span>
     <button id="speak-btn" aria-label="Listen in American English" title="Listen">🔊</button>
     <button id="slow-speak-btn" aria-label="Listen slowly in American English" title="Listen slowly">🐢</button>
