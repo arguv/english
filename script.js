@@ -177,8 +177,6 @@ function resetSession() {
 }
 
 function refreshSession() {
-    categorySelect.value = "2";
-    typeSelect.value = "2";
     buildSession();
 }
 
@@ -265,12 +263,12 @@ document.addEventListener("keydown", e => {
 
 speakBtn.onclick = e => {
     e.stopPropagation();
-    pronounceWord(0.75);
+    pronounceWord(0.7);
 };
 
 slowSpeakBtn.onclick = e => {
     e.stopPropagation();
-    pronounceWord(0.5);
+    pronounceWord(0.3);
 };
 
 window.addEventListener("pagehide", stopSpeech);
