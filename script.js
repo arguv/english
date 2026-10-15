@@ -60,6 +60,7 @@ let sessionStarted = false;
 
 const neutralColors = ["#c2e9fb", "#dffbc2", "#760c726e", "#dde9406e", "#a2d6fb", "#9ecd6e"];
 let bgIndex = 0;
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // For quick category lookup
 let categoryMap = {};
@@ -162,6 +163,8 @@ function buildSession() {
     updateProgress();
     learningActions.hidden = true;
     wordEl.textContent = "👋 Tap or press SPACE";
+    card.disabled = false;
+    card.setAttribute("aria-disabled", "false");
 
     mascot.style.display = "block";
     wordImage.style.display = "none";
@@ -216,6 +219,7 @@ function nextWord() {
         currentWord = "";
         currentWordObj = null;
         wordEl.textContent = "🎉 Finished!";
+        card.setAttribute("aria-disabled", "true");
         learningActions.hidden = true;
         setSpeechControls(false);
         showImgBtn.style.display = "none";
@@ -236,6 +240,7 @@ function nextWord() {
     currentWord = currentWordObj.text;
 
     wordEl.textContent = currentWord;
+    card.setAttribute("aria-disabled", "true");
     animateWord();
     learningActions.hidden = false;
 
@@ -310,5 +315,7 @@ function changeBackground() {
     bgIndex = (bgIndex + 1) % neutralColors.length;
 }
 
-setInterval(changeBackground, 7000);
+setInterval(() => {
+    if (!reducedMotion.matches) changeBackground();
+}, 7000);
 changeBackground();

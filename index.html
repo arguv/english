@@ -33,8 +33,12 @@
 
 <!-- TOP MENU -->
 <div id="top-menu">
-    <select id="category-select" aria-label="Word category"></select>
-    <select id="type-select" aria-label="Word type"></select>
+    <label class="filter-control" for="category-select">Category
+        <select id="category-select" aria-label="Word category"></select>
+    </label>
+    <label class="filter-control" for="type-select">Type
+        <select id="type-select" aria-label="Word type"></select>
+    </label>
     <button id="refresh-session" aria-label="Refresh session">🔄 <span id="refresh-text">Refresh Session</span></button>
 </div>
 
@@ -44,10 +48,10 @@
 </div>
 
 <!-- CARD -->
-<div class="card" id="card">
-    <img id="mascot" src="mascot.png" alt="Mascot"/>
-    <div id="word">👋 Tap or press SPACE</div>
-</div>
+<button class="card" id="card" type="button" disabled>
+    <img id="mascot" src="mascot.png" alt=""/>
+    <span id="word" aria-live="polite" aria-atomic="true">👋 Tap or press SPACE</span>
+</button>
 
 <div id="learning-actions" hidden>
     <button id="practice-again-btn" type="button">Practice again</button>
