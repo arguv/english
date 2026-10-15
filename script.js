@@ -1,6 +1,9 @@
 const card = document.getElementById("card");
 const wordEl = document.getElementById("word");
 const progressEl = document.getElementById("progress");
+const learningActions = document.getElementById("learning-actions");
+const knowItBtn = document.getElementById("know-it-btn");
+const practiceAgainBtn = document.getElementById("practice-again-btn");
 const speakBtn = document.getElementById("speak-btn");
 const slowSpeakBtn = document.getElementById("slow-speak-btn");
 const speechStatus = document.getElementById("speech-status");
@@ -50,6 +53,7 @@ const refreshBtn = document.getElementById("refresh-session");
 let allWords = [];
 let remaining = [];
 let total = 0;
+let known = 0;
 let currentWord = "";
 let currentWordObj = null;
 let sessionStarted = false;
@@ -150,8 +154,10 @@ function buildSession() {
 
     remaining.sort(() => Math.random() - 0.5);
     total = remaining.length;
+    known = 0;
 
-    progressEl.textContent = `📘 0 / ${total}`;
+    updateProgress();
+    learningActions.hidden = true;
     wordEl.textContent = "👋 Tap or press SPACE";
 
     mascot.style.display = "block";
@@ -184,12 +190,32 @@ function animateWord() {
 }
 
 // Next word
+function updateProgress() {
+    progressEl.textContent = `📘 ${known} / ${total} known`;
+}
+
+function rateWord(knowIt) {
+    if (!currentWordObj) return;
+    if (knowIt) {
+        known++;
+    } else {
+        // Show up to three other cards before asking about this one again.
+        remaining.splice(Math.max(0, remaining.length - 3), 0, currentWordObj);
+    }
+    currentWordObj = null;
+    currentWord = "";
+    updateProgress();
+    nextWord();
+}
+
 function nextWord() {
+    if (currentWordObj) return;
     stopSpeech();
     if (!remaining.length) {
         currentWord = "";
         currentWordObj = null;
         wordEl.textContent = "🎉 Finished!";
+        learningActions.hidden = true;
         setSpeechControls(false);
         showImgBtn.style.display = "none";
         wordImage.style.display = "none";
@@ -210,7 +236,7 @@ function nextWord() {
 
     wordEl.textContent = currentWord;
     animateWord();
-    progressEl.textContent = `📘 ${total - remaining.length} / ${total}`;
+    learningActions.hidden = false;
 
     setSpeechControls(true);
     wordImage.style.display = "none";
@@ -227,6 +253,8 @@ function nextWord() {
 
 // Events
 card.addEventListener("click", nextWord);
+knowItBtn.onclick = () => rateWord(true);
+practiceAgainBtn.onclick = () => rateWord(false);
 
 document.addEventListener("keydown", e => {
     if (e.code === "Space" && !e.target.closest("button, select, input, textarea, [contenteditable]")) {
