@@ -237,12 +237,12 @@ document.addEventListener("keydown", e => {
 
 speakBtn.onclick = e => {
     e.stopPropagation();
-    pronounceWord(1);
+    pronounceWord(0.75);
 };
 
 slowSpeakBtn.onclick = e => {
     e.stopPropagation();
-    pronounceWord(0.75);
+    pronounceWord(0.5);
 };
 
 window.addEventListener("pagehide", stopSpeech);
