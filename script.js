@@ -324,6 +324,8 @@ showImgBtn.onclick = e => {
 };
 
 // Background
+const backgroundChangeIntervalMs = 15000; // Change color every 15 seconds.
+
 function changeBackground() {
     document.body.style.background = neutralColors[bgIndex];
     bgIndex = (bgIndex + 1) % neutralColors.length;
@@ -331,5 +333,5 @@ function changeBackground() {
 
 setInterval(() => {
     if (!reducedMotion.matches) changeBackground();
-}, 7000);
+}, backgroundChangeIntervalMs);
 changeBackground();
