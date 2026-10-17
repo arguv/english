@@ -335,3 +335,20 @@ setInterval(() => {
     if (!reducedMotion.matches) changeBackground();
 }, backgroundChangeIntervalMs);
 changeBackground();
+
+// Discourage casual inspection through context menus and common shortcuts.
+document.addEventListener("contextmenu", event => {
+    event.preventDefault();
+});
+
+document.addEventListener("keydown", event => {
+    const key = event.key.toLowerCase();
+
+    if (
+        key === "f12" ||
+        (event.ctrlKey && event.shiftKey && ["i", "j", "c"].includes(key)) ||
+        (event.metaKey && event.altKey && ["i", "j", "c"].includes(key))
+    ) {
+        event.preventDefault();
+    }
+});
