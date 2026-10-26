@@ -251,6 +251,7 @@
     { "text": "cat", "count": 1, "category": ["2","3"], "type": "2", "image": true },
     { "text": "butterfly", "count": 1, "category": ["2","3"], "type": "2", "image": true },
     { "text": "bear", "count": 1, "category": ["2","3"], "type": "2", "image": true },
+    { "text": "penguin", "count": 1, "category": ["2","3"], "type": "2", "image": false },
 
     { "text": "bus stop", "count": 1, "category": ["2","6"], "type": "2", "image": false },
     { "text": "cafe", "count": 1, "category": ["2","6"], "type": "2", "image": false },

@@ -188,6 +188,17 @@ select:focus-visible {
     border-radius: 8px;
 }
 
+#star-count {
+    min-height: 32px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.65);
+    color: #333;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
 #speech-status {
     text-align: center;
     font-size: 14px;
