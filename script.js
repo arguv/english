@@ -1,6 +1,7 @@
 const card = document.getElementById("card");
 const wordEl = document.getElementById("word");
 const progressEl = document.getElementById("progress");
+const starCountEl = document.getElementById("star-count");
 const learningActions = document.getElementById("learning-actions");
 const knowItBtn = document.getElementById("know-it-btn");
 const practiceAgainBtn = document.getElementById("practice-again-btn");
@@ -8,6 +9,7 @@ const speakBtn = document.getElementById("speak-btn");
 const slowSpeakBtn = document.getElementById("slow-speak-btn");
 const speechStatus = document.getElementById("speech-status");
 const speechSupported = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+const CORRECT_WORDS_PER_STAR = 3;
 let englishVoice = null;
 
 function updateEnglishVoice() {
@@ -54,6 +56,7 @@ let allWords = [];
 let remaining = [];
 let total = 0;
 let known = 0;
+let starTotal = 0;
 let currentWord = "";
 let currentWordObj = null;
 let sessionStarted = false;
@@ -172,8 +175,10 @@ function buildSession() {
     }
     total = remaining.length;
     known = 0;
+    starTotal = 0;
 
     updateProgress();
+    updateStarCount();
     learningActions.hidden = true;
     wordEl.textContent = total ? "👋 Tap or press SPACE" : "No entries in this category yet.";
     card.disabled = total === 0;
@@ -211,17 +216,24 @@ function updateProgress() {
     progressEl.textContent = `📘 ${known} / ${total} known`;
 }
 
+function updateStarCount() {
+    starCountEl.textContent = `⭐ ${starTotal}`;
+}
+
 function rateWord(knowIt) {
     if (!currentWordObj) return;
     if (knowIt) {
         known++;
+        if (known % CORRECT_WORDS_PER_STAR === 0) starTotal++;
     } else {
+        starTotal = Math.max(0, starTotal - 1);
         // Show up to three other cards before asking about this one again.
         remaining.splice(Math.max(0, remaining.length - 3), 0, currentWordObj);
     }
     currentWordObj = null;
     currentWord = "";
     updateProgress();
+    updateStarCount();
     nextWord();
 }
 
