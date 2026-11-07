@@ -24,7 +24,7 @@
     { "id": "15", "name": "Size/Quality/Feel",  "folder": false },
     { "id": "16", "name": "Other",              "folder": false },
     { "id": "17", "name": "Sports & Games",     "folder": false },
-    { "id": "18", "name": "Weather",            "folder": false }
+    { "id": "18", "name": "Weather",            "folder": true }
   ],
   "types": [
     { "2": "Word", "categories": "categories" },
