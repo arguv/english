@@ -462,6 +462,10 @@
     {"text": "glance", "count": 1, "category": ["2"], "type": "5", "image": false},
     {"text": "slice", "count": 1, "category": ["2"], "type": "5", "image": false},
     {"text": "malformed", "count": 1, "category": ["2"], "type": "5", "image": false},
+    {"text": "preserve", "count": 1, "category": ["2"], "type": "5", "image": false},
+    {"text": "badges", "count": 1, "category": ["2"], "type": "5", "image": false},
+    {"text": "prototype", "count": 1, "category": ["2"], "type": "5", "image": false},
+    {"text": "tons", "count": 1, "category": ["2"], "type": "5", "image": false},
 
     {"text": "wrap up", "count": 1, "category": ["2", "3"], "type": "5", "image": false},
     {"text": "hang up", "count": 1, "category": ["2", "3"], "type": "5", "image": false},
